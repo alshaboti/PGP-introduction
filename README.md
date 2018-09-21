@@ -106,13 +106,43 @@ gpg --edit-key Bob
 Press trust, then select the level of trust. Default is fully turst, ultimate trust is only for your own key.
 
 ### Sign message
+Signature provides integrity (protect agains message tampring), and authenticity (who is the sender). 
+
 To sign message there are diffrent ways:
+1- Clear Sign 
 ```
 gpg --clearsign message.txt
 ``` 
-It will sign the message but will not encrypt it. Out put will the the massage and at the end your signature. 
+It will sign the message but will not encrypt it. It will output the the massage in clear and at the end your signature. 
 
 The receiver can verify the signature, if he has the sender public key. 
 ```
 gpg --verify message.txt.asc
 ```
+
+2- Sign with the message embedded.
+It needs to use --armor for base64, otherwise will get binary. 
+```
+gpg --armor --sign message.txt
+```
+The difference is that the output is not a signature only rather it include the message as well. 
+So receiver can verify and decrypt the same file.
+
+```
+gpg --decrypt message.txt.asc
+gpg --verify message.txt.asc
+``
+`
+3- Sign only without embedding the message
+
+```
+gpg --armor --detach-sign message.txt
+```
+The output is the signature only. Hence, the receiver need two files, the signature and the actual message to verify. 
+```
+gpg --verify  message.txt.asc  messsage.txt
+```
+
+In any case if you try to tamper with the message or its signature the verification will fail. 
+
+
