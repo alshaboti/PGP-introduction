@@ -125,8 +125,18 @@ throw-keyids
 ```
 
 Now you can start creating keys and do the signature. 
+# Create revocation certificate 
+Revocation certificate is used to tell other parties (e.g. upload to keyserver) that your key is not valid anymore and they should not use it to send to you or accept any message.
 
-# FAQ
+It is a good practice to create revocation certificates at the time you create your keys. Then store it in a safe place, in case you come to a time when your master key get compromised or missed or for any other reason. At that time you will need to use these certificates.
+
+To create revocaation certificate
+```
+gpg --armor --gen-revoke <your-id>
+```
+You should save it in a secure place, otherwise it maybe used to revoke your key while you still use it. 
+
+# NOTES
 - When you use pgp to encrypt message to 10 recipients, does it encrypts it ten times.
 Rather it generate random symmetric key to encrypt the message. 
 Then encrypts the symmetric key using recipeint public key, so they can decrypt the symmetric key and use it to decrypt the message. 
