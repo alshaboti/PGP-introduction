@@ -18,8 +18,8 @@ This will enable you to decrypt messages that you encrypt for others.
 - Set digest and cipher preferences is IMPORTANT before you create or sing keys. 
 
 A good gpg practice can be found in [here](https://riseup.net/en/security/message-security/openpgp/best-practices). 
-A good example of '.gnugp/gpg.conf' can be found here (here)[https://raw.githubusercontent.com/ioerror/duraconf/master/configs/gnupg/gpg.conf],
-and (here)[https://gist.github.com/bnagy/8914f712f689cc01c267#gpg-gpgrc]
+A good example of '.gnugp/gpg.conf' can be found [here](https://raw.githubusercontent.com/ioerror/duraconf/master/configs/gnupg/gpg.conf) ,
+and [here](https://gist.github.com/bnagy/8914f712f689cc01c267#gpg-gpgrc).
 
 Here is what can be a good configuration file
 ```
