@@ -32,7 +32,7 @@ gpg --full-gen-key
 - key expries (set an expire date, don't warry you can update and extend the expires)
 - details, and comment
 - user-id
-- Then will ask you to provide passphrase to protect your private key. 
+- Then will ask you to provide passphrase to protect your private key (passphrase is used to enc your private key itself, so if it got stolen it is enc and needs passphrase to be decrypted). 
 
 ### To list the public keys you have. 
 ```
