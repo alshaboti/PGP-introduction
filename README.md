@@ -1,5 +1,5 @@
 # PGP-introduction
-An introduction of PGP and its implementation GPG base on youtube video by Justin Steven at [https://www.youtube.com/watch?v=Qp9ZOgLN6V0](here)
+An introduction of PGP and its implementation GPG base on youtube video by Justin Steven at [here](https://www.youtube.com/watch?v=Qp9ZOgLN6V0).
 
 
 ## PGP and GPG
@@ -87,6 +87,10 @@ To sign bob key use:
 ```
 gpg --sign-key bob@example.com
 ```
+To sign it localy, just for host use, not to be published in keyserver then 
+```
+gpg --lsign-key <user-id>
+```
 
 Then list the signed keys
 
@@ -131,8 +135,7 @@ So receiver can verify and decrypt the same file.
 ```
 gpg --decrypt message.txt.asc
 gpg --verify message.txt.asc
-``
-`
+```
 3- Sign only without embedding the message
 
 ```
