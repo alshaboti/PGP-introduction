@@ -21,7 +21,7 @@ A good gpg practice can be found in [here](https://riseup.net/en/security/messag
 A good example of '.gnugp/gpg.conf' can be found [here](https://raw.githubusercontent.com/ioerror/duraconf/master/configs/gnupg/gpg.conf) ,
 and [here](https://gist.github.com/bnagy/8914f712f689cc01c267#gpg-gpgrc).
 
-Here is what can be a good configuration file may look like at the time of writting(gpg.conf)[https://github.com/alshaboti/PGP-introduction/blob/master/gpg.conf]
+Here is what can be a good configuration file may look like at the time of writting [gpg.conf](https://github.com/alshaboti/PGP-introduction/blob/master/gpg.conf)
 
 Now you can start creating keys and do the signature. 
 # Create revocation certificate 
