@@ -243,13 +243,60 @@ ssb   1024R/0xDDE04A7B83EAB9F7 2018-09-24
       Key fingerprint = 391F 483E 5290 364C 90D2  A670 DDE0 4A7B 83EA B9F7
 ```
 ## Backup revocation certificates.
-We will first ex
 
+```
+gpg --armor --gen-revoke 0xDCC9E9EDBA6103EB
+gpg --expert --homedir ./gnupg-test2 --gen-revoke 0xD06350E1BAB5DDCB
+
+sec  1024R/0xD06350E1BAB5DDCB 2018-09-25 alice <alice@example.com>
+
+Create a revocation certificate for this key? (y/N) y
+Please select the reason for the revocation:         
+  0 = No reason specified
+  1 = Key has been compromised
+  2 = Key is superseded
+  3 = Key is no longer used
+  Q = Cancel
+(Probably you want to select 1 here)
+Your decision? 1
+Enter an optional description; end it with an empty line:
+> 
+Reason for revocation: Key has been compromised
+(No description given)
+Is this okay? (y/N) y
+                     
+You need a passphrase to unlock the secret key for
+user: "alice <alice@example.com>"
+1024-bit RSA key, ID 0xD06350E1BAB5DDCB, created 2018-09-25
+
+ASCII armored output forced.
+Revocation certificate created.
+
+Please move it to a medium which you can hide away; if Mallory gets
+access to this certificate he can use it to make your key unusable.
+It is smart to print this certificate and store it away, just in case
+your media become unreadable.  But have some caution:  The print system of
+your machine might store the data and make it available to others!
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Comment: A revocation certificate should follow
+
+iJ8EIAEKAAkFAlupzi0CHQIACgkQ0GNQ4bq13cuNjAP6AxYisLXX4eKW8azSAvy7
+EL5uwODYI3XBu6fOuEtIw9zc7Z1MfYdwjZ02Se3Hv+pRvpeICpw5ruqhtU3GGxA5
+dEY2Z0CNoCrF39NUB1pfzrvgOHkDATvqLBwh5/cWgSK3XtCNN6ilKscaHOOmT4Uk
+Yi+HXYzYN1qALL/Hgpb0+7Q=
+=tJGC
+-----END PGP PUBLIC KEY BLOCK-----
+```
+You may need to generate revocation certificat for each reason. 
 ## Backup the master private key.
 We will do the following:
 1- Exporting all secret keys (secret master and subkeys). Save this one away!!!!
 ```
 gpg --homedir ./gnupg-test2 --export-secret-keys --armor --output master-and-subkeys-secret-keys.gpg 0xDCC9E9EDBA6103EB
+```
+and also the public keys
+```
+gpg --homedir gnupg-test2 --export --armor --output master_and_subkeys_public_keys.gpg 0xDCC9E9EDBA6103EB
 ```
 2- Exporting only the secret subkeys 
 ```
