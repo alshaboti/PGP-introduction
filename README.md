@@ -148,4 +148,8 @@ gpg --verify  message.txt.asc  messsage.txt
 
 In any case if you try to tamper with the message or its signature the verification will fail. 
 
+# Resources
+1- https://alexcabal.com/creating-the-perfect-gpg-keypair/
+2- https://spin.atomicobject.com/2013/11/24/secure-gpg-keys-guide/
+3- https://blog.tinned-software.net/create-gnupg-key-with-sub-keys-to-sign-encrypt-authenticate/
 
