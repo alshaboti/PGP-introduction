@@ -6,8 +6,8 @@
 
 This part will cover:
 ## Generating keys offline
-1- A good practice is to generate gpg offline using live CD (e.g. Tails), in a host with all WiFi, ethernet, Bluetooth etc OFF. 
-2- Before going a head make sure your gpg.conf file is properly configured as shown in the previous part. 
+1- A good practice is to generate gpg offline using live CD (e.g. Tails), in a host with all WiFi, ethernet, Bluetooth etc OFF.  
+2- Before going a head make sure your gpg.conf file is properly configured as shown in the previous part.  
 3- Create subkeys to be used day to day, and save the master key away. 
 
 Note: we are working with asymatric crypto, that means always keys are pair. If we create master key we will end up haveing one public and one private both are master keys. Similar with sub keys there will be one public and one private for each created subkey. Each pair have same fingerprint. The key that hold all this chain is the master private key.
@@ -32,7 +32,7 @@ Your selection? 8
 By default key will have Sign, Certify and Encrypt cababilities, we need to untoggle (S sign,E encrypt) and only keep Certify. So select S to untoggle sign.
 ```
 Possible actions for a RSA key: Sign Certify Encrypt Authenticate 
-Current allowed actions: Sign Certify Encrypt 
+Current allowed actions: Sign Certify Encrypt <<<<< HERE
 
    (S) Toggle the sign capability
    (E) Toggle the encrypt capability
@@ -287,9 +287,11 @@ Yi+HXYzYN1qALL/Hgpb0+7Q=
 =tJGC
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-You may need to generate revocation certificat for each reason. 
+Many things can force you to use the revocation certificate (e.g. Key compromise, key loss/damage).  
+You may need to generate more than one revocation certificat, one for each reason.
 ## Backup the master private key.
-We will do the following:
+Unfortunitly there is no direct way to export master key using gpg, as far as I know.  
+We will do it by exporting all keys, delete all, then importing only the subkeys. This will leave master key exported.    
 1- Exporting all secret keys (secret master and subkeys). Save this one away!!!!
 ```
 gpg --homedir ./gnupg-test2 --export-secret-keys --armor --output master-and-subkeys-secret-keys.gpg 0xDCC9E9EDBA6103EB
