@@ -290,7 +290,7 @@ Yi+HXYzYN1qALL/Hgpb0+7Q=
 Many things can force you to use the revocation certificate (e.g. Key compromise, key loss/damage).  
 You may need to generate more than one revocation certificat, one for each reason.
 ## Backup the master private key.
-Unfortunitly there is no direct way to export master key using gpg, as far as I know.  
+Unfortunitly there is no direct way to export master key using gpg.  
 We will do it by exporting all keys, delete all, then importing only the subkeys. This will leave master key exported.    
 1- Exporting all secret keys (secret master and subkeys). Save this one away!!!!
 ```
