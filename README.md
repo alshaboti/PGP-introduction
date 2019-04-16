@@ -112,7 +112,7 @@ Press trust, then select the level of trust. Default is fully turst, ultimate tr
 ### Sign message
 Signature provides integrity (protect agains message tampring), and authenticity (who is the sender). 
 
-To sign message there are diffrent ways:
+To sign message there are diffrent ways:  
 1- Clear Sign 
 ```
 gpg --clearsign message.txt
@@ -147,6 +147,70 @@ gpg --verify  message.txt.asc  messsage.txt
 ```
 
 In any case if you try to tamper with the message or its signature the verification will fail. 
+
+## Debug gpg2
+As we see, `--sign` actually sign but include the massage somehow (I am not able to find a good resource to figure out what happen exactly). While `--sign --encrypt` sign and encrypt the message as expected.  
+To debug gpg2 output file use `--list-packets` it will list packets that used to generate the gpg2 file. 
+
+With `--sign` option
+```
+gpg2 --sign labs02-answer-sheet.txt       
+gpg2 --list-packets labs02-answer-sheet.txt.gpg 
+# off=0 ctb=a3 tag=8 hlen=1 plen=0 indeterminate
+:compressed packet: algo=1
+# off=2 ctb=90 tag=4 hlen=2 plen=13
+:onepass_sig packet: keyid 6C3899E161A75894
+        version 3, sigclass 0x00, digest 8, pubkey 1, last=1
+# off=17 ctb=ad tag=11 hlen=3 plen=1182
+:literal data packet:
+        mode b (62), created 1555371776, name="labs02-answer-sheet.txt",
+        raw data: 1153 bytes
+# off=1202 ctb=89 tag=2 hlen=3 plen=307
+:signature packet: algo 1, keyid 6C3899E161A75894
+        version 4, created 1555371776, md5len 0, sigclass 0x00
+        digest algo 8, begin of digest 12 8c
+        hashed subpkt 33 len 21 (issuer fpr v4 DB1823524068F6A4FE24CA3A6C3899E161A75894)
+        hashed subpkt 2 len 4 (sig created 2019-04-15)
+        subpkt 16 len 8 (issuer key ID 6C3899E161A75894)
+        data: [2044 bits]
+```
+
+With `--sign --encrypt`
+```
+gpg2 --sign --encrypt labs02-answer-sheet.txt
+gpg2 --list-packets labs02-answer-sheet.txt.gpg
+gpg: encrypted with 2048-bit RSA key, ID 50A5ADB5BAB87DD2, created 2019-04-11
+      "Mohammed <mohammed@ecs.vuw.ac.nz>"
+# off=0 ctb=85 tag=1 hlen=3 plen=268
+:pubkey enc packet: version 3, algo 1, keyid 50A5ADB5BAB87DD2
+        data: [2047 bits]
+# off=271 ctb=d2 tag=18 hlen=2 plen=0 partial new-ctb
+:encrypted data packet:
+        length: unknown
+        mdc_method: 2
+# off=292 ctb=a3 tag=8 hlen=1 plen=0 indeterminate
+:compressed packet: algo=2
+# off=294 ctb=90 tag=4 hlen=2 plen=13
+:onepass_sig packet: keyid 6C3899E161A75894
+        version 3, sigclass 0x00, digest 10, pubkey 1, last=1
+# off=309 ctb=ad tag=11 hlen=3 plen=1182
+:literal data packet:
+        mode b (62), created 1555371839, name="labs02-answer-sheet.txt",
+        raw data: 1153 bytes
+# off=1494 ctb=89 tag=2 hlen=3 plen=307
+:signature packet: algo 1, keyid 6C3899E161A75894
+        version 4, created 1555371839, md5len 0, sigclass 0x00
+        digest algo 10, begin of digest b3 fc
+        hashed subpkt 33 len 21 (issuer fpr v4 DB1823524068F6A4FE24CA3A6C3899E161A75894)
+        hashed subpkt 2 len 4 (sig created 2019-04-15)
+        subpkt 16 len 8 (issuer key ID 6C3899E161A75894)
+        data: [2045 bits]
+```
+## gpg2 default outpt file extention
+By default gpg2 use   
+- `.sig` for detatch signature
+- `.gpg` for everything else. 
+- `.asc` if `--armor` option used regardless of its default extention (overwrite `.sig` and `.gpg`). 
 
 # Resources
 1- https://alexcabal.com/creating-the-perfect-gpg-keypair/
