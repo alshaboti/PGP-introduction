@@ -1,7 +1,11 @@
 # PGP-introduction
 An introduction of PGP and its implementation GPG base on youtube video by Justin Steven at [here](https://www.youtube.com/watch?v=Qp9ZOgLN6V0).
 
-
+# This tutorial divided into four parts:
+- [Part1](./pgp-good-practice-part2.md)
+- [Part2](./pgp-good-practice-part2.md)
+- [Part3](./pgp-good-practice-part3.md)
+- [Utilities](pass-and-gpg.md)
 ## PGP and GPG
 - PGP is the protocol and GPG is the implementation. 
 - There are GPG1 and GPG2 implementation in linux. 
